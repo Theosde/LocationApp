@@ -2,7 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+import url from './config';
+
+
+
 function App() {
+
+console.log(url);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +24,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+        {"dsqdqd"+url}
         </a>
       </header>
     </div>
