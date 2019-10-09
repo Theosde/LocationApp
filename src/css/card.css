@@ -1,0 +1,71 @@
+.card{
+  height: 450px;
+  min-width: 350px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #EFEFEF;
+  border-radius: 15px;
+  margin: 15px 15px;
+  transition: 1s;
+}
+
+.card:hover{
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.55);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.55);
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.55);
+cursor: pointer;
+transform: scale(1.1);
+}
+
+.img{
+  margin: 10px;
+  height: 250px;
+  width: 328px;
+
+  border-radius: 15px;
+  background-size: cover;
+}
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 15px 15px;
+}
+
+.title div{
+  margin-right: 25px;
+  font-weight: bold;
+}
+
+
+.type,.price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 15px;
+}
+
+.body-bg{
+  background-image: url("../img/whitebg.jpg");
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 45px;
+}
+
+@media screen and (max-width: 760px){
+  .body-bg{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding-top: 20px;
+  }
+
+  .card{
+    margin-top: 0px;
+  }
+}

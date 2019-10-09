@@ -1,0 +1,49 @@
+.body-bg{
+  background-image: url("../img/whitebg.jpg");
+  width: 100%;
+  height: 100vh!important;
+  background-size: cover;
+  display: flex;
+  justify-content: center!important;
+  align-items: center;
+}
+
+body{
+  background-color: white;
+}
+
+.form-config{
+  width: 600px;
+  height: 415px;
+  border: 2px solid #999;
+  border-radius: 25px;
+  background-color: white;
+
+}
+.logo{
+  background-image: url("../img/logo_thales.png");
+  width: 300px;
+  height: 250px;
+  background-size: cover;
+}
+
+.form-group{
+  margin: 35px;
+}
+
+button{
+  margin-left: 150px;
+  width: 300px;
+}
+.btn-primary{
+  border-style: none;
+  background-image:linear-gradient(to right top, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb)!important;
+  border-radius: 25px;
+}
+
+a{
+  color: black;
+}
+a:hover{
+  color:#7405ab;
+}
