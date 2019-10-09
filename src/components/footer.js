@@ -1,16 +1,16 @@
 import React from 'react';
+import "../css/footer.css";
 
-import url from './config';
 
-function test() {
+function Footer() {
 
-console.log(url);
+
 
   return (
-    <div>
+    <div className="footer-bg">
 
     </div>
   );
 }
 
-export default test;
+export default Footer;

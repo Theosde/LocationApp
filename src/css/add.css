@@ -1,0 +1,23 @@
+.addcard{
+  height: 450px;
+  min-width: 350px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #EFEFEF;
+  border-radius: 15px;
+  margin: 55px 25px;
+  transition: 1s;
+  background-image: url("../img/add-icon.png");
+  background-size: cover;
+  max-width: 350px;
+
+}
+
+.addcard:hover{
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.55);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.55);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.55);
+  cursor: pointer;
+  transform: scale(1.1);
+}
