@@ -16,6 +16,8 @@ const history = createBrowserHistory()
 function App() {
 
 
+  console.log(history);
+
   return (
     <div className="App">
       <Router history={history}>
