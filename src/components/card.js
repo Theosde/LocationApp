@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from "./header";
+import Footer from "./footer";
 import "../css/card.css";
 import "../css/add.css";
 
@@ -11,7 +13,10 @@ function Card() {
 
 
   return (
-    <div className="body-bg">
+  <div>
+    <Header/>
+    <div className="body-bg-card">
+
 
       <div className="addcard">
 
@@ -72,8 +77,12 @@ function Card() {
         </div>
 
     </div>
+    <Footer/>
+
+  </div>
 
   );
+
 }
 
 export default Card;

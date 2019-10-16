@@ -1,4 +1,4 @@
-.body-bg{
+.body-bg-login{
   background-image: url("../img/whitebg.jpg");
   width: 100%;
   height: 100vh!important;
@@ -12,10 +12,10 @@ body{
   background-color: white;
 }
 
-.form-config{
-  width: 600px;
+.form-config-login{
+  width: 600px!important;
   height: 415px;
-  border: 2px solid #999;
+  border: 2px solid #D5D7D9;
   border-radius: 25px;
   background-color: white;
 
@@ -29,6 +29,9 @@ body{
 
 .form-group{
   margin: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
 }
 
 button{
@@ -46,4 +49,10 @@ a{
 }
 a:hover{
   color:#7405ab;
+}
+
+@media screen and (max-width: 760px){
+  .form-config-login{
+    width: 400px!important;
+  }
 }

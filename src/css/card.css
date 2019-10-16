@@ -46,10 +46,10 @@ transform: scale(1.1);
   margin: 15px 15px;
 }
 
-.body-bg{
+.body-bg-card{
   background-image: url("../img/whitebg.jpg");
   width: 100%;
-  height: auto;
+  height: auto!important;
   background-size: cover;
   display: flex;
   flex-wrap: wrap;
@@ -58,7 +58,7 @@ transform: scale(1.1);
 }
 
 @media screen and (max-width: 760px){
-  .body-bg{
+  .body-bg-card{
     display: flex;
     flex-direction: column;
     height: auto;
@@ -66,6 +66,6 @@ transform: scale(1.1);
   }
 
   .card{
-    margin-top: 0px;
+    margin: 20px 35px;
   }
 }

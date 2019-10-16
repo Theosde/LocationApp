@@ -7,6 +7,8 @@ import Login from "./components/login";
 import Index from "./components/index";
 import Signup from "./components/signup";
 import Card from "./components/card";
+import Info from "./components/myinfo";
+import Message from "./components/mess";
 
 
 import url from './config';
@@ -24,12 +26,12 @@ function App() {
     <div className="App">
       <Router history={history}>
         <Switch>
-
           <Route exact path="/" component={(props) => <Login {...props} /> } />
           <Route  path="/connection" component={(props) => <Login {...props} /> } />
           <Route  path="/inscription" component={(props) => <Signup {...props} /> } />
           <Route  path="/appart" component={(props) => <Card {...props} /> } />
-
+          <Route  path="/info" component={(props) => <Info {...props} /> } />
+          <Route  path="/messages" component={(props) => <Message {...props} /> } />
         </Switch>
     </Router>
   </div>

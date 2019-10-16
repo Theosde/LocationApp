@@ -13,7 +13,7 @@ function Signup() {
 
     <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"(500px"}}>
 
-      <div className="body-bg">
+      <div className="body-bg-suscribe">
 
 
         <form className="form-config">

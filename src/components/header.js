@@ -13,16 +13,16 @@ function Header() {
         <div className="header-bg">
             <ul>
               <li>
-                <Link className="Link left" to="/">Mes Infos</Link>
+                <Link className="Link left" to="/"><div className="icon-1"></div><span>Mes Infos</span></Link>
               </li>
               <li>
-                <Link className="Link" to="/connection">Mes Logements</Link>
+                <Link className="Link" to="/connection"><div className="icon-2"></div><span>Mes Logements</span></Link>
               </li>
               <li>
-                <Link className="Link" to="/connection">Partager ou Télécharger des documents</Link>
+                <Link className="Link" to="/connection"><div className="icon-3"></div><span>Mes Documents</span></Link>
               </li>
               <li>
-                <Link className="Link right" to="/connection">Messagerie</Link>
+                <Link className="Link right" to="/connection"><div className="icon-4"></div><span>Messagerie</span></Link>
               </li>
             </ul>
         </div>
