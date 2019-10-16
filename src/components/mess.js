@@ -18,13 +18,7 @@ function Message() {
       <div className="column-one">
 
         <div className="contact-line" onClick={()=>{
-          var element = document.getElementById('colomn-two')
 
-          element.style.display = element.style.display === 'none' ? 'block' : 'none';
-
-          var chat = document.getElementById('chat')
-          
-          chat.style.width = chat.style.width === '55%' ? '55%' : '80%';
         }}>
 
           <h4>Appartement 1</h4>

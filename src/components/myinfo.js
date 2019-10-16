@@ -36,12 +36,10 @@ function Info() {
           <div className="left-bottom-info">
             <div className="phone">Téléphone</div>
             <div className="mail">Email</div>
-            <div className="adress">Adresse</div>
           </div>
           <div className="right-bottom-info">
             <div className="filled-phone"><p>06.28.3.3.20.17</p><p className="modif-btn">Modifier</p></div>
             <div className="filled-mail"><p>arnaud.rey.job@gmail.com</p><p className="modif-btn">Modifier</p></div>
-            <div className="filled-adress">2 rue de la fraternité 69100 Villeurbanne</div>
           </div>
         </div>
       </div>

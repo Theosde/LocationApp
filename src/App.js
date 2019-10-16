@@ -32,6 +32,7 @@ function App() {
           <Route  path="/appart" component={(props) => <Card {...props} /> } />
           <Route  path="/info" component={(props) => <Info {...props} /> } />
           <Route  path="/messages" component={(props) => <Message {...props} /> } />
+          <Route  path="/documents" component={(props) => <Upload {...props} /> } />
         </Switch>
     </Router>
   </div>
