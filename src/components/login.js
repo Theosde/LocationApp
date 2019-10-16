@@ -23,7 +23,7 @@ function Login({match}) {
   },[])
 
   return (
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"(500px"}}>
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"100vh"}}>
 
       <div className="body-bg-login">
 

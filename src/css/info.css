@@ -1,0 +1,117 @@
+.body-bg-info{
+  background-image: url("../img/whitebg.jpg");
+  width: 100%;
+  height: 100vh!important;
+  background-size: cover;
+  display: flex;
+  justify-content: center!important;
+  align-items: center;
+}
+
+.main-info{
+  background: white;
+  width: 80%;
+  height: 500px;
+  border-radius: 15px;
+  border: 1px solid #D5D7D9;
+}
+
+
+
+.top-info{
+  margin:0 25px;
+  height: 50%;
+  display: flex;
+}
+.left-top-info{
+
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.right-top-info{
+  width: 70%;
+  height: 100%;
+}
+
+
+
+.bottom-info{
+  height: 50%;
+  margin:0 25px;
+  display: flex;
+}
+.left-bottom-info{
+
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.right-bottom-info{
+  width: 70%;
+  height: 100%;
+}
+
+
+.birthdate, .surname, .name{
+  height: 33%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: grey;
+}
+
+.phone, .mail, .adress{
+  height: 33%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: grey;
+}
+
+.filled-birthdate, .filled-surname, .filled-name{
+  height: 33%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.filled-phone, .filled-mail, .filled-adress{
+  height: 33%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.filled-mail, .filled-phone{
+  display: flex;
+  justify-content: space-between;
+}
+
+.modif-btn{
+  background-image: -webkit-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  background-image: -o-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  background-image: linear-gradient(to top right, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 760px){
+  .modif-btn{
+    display: none;
+  }
+  .left-bottom-info, .left-top-info{
+    width: 45%;
+  }
+  .right-bottom-info, .right-top-info{
+    width: 55%;
+  }
+}
