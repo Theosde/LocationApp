@@ -1,34 +1,65 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "../css/login.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Link, Route, Redirect} from "react-router-dom";
 
+import islog from "./moduleAuth"
 
 
 function Login({match}) {
 
-  console.log(match);
+  const[signInData,setSignInData] = useState({email:"",password:""})
+
+  const[actualisationPage,setActualisationPage] = useState(false)
+
+  useEffect(()=>{
+
+    if ( JSON.parse(localStorage.getItem("user")) == null ) {
+      console.log("localStorage vide");
+    }else {
+      console.log("localStorage", JSON.parse(localStorage.getItem("user")) );
+      setSignInData(JSON.parse(localStorage.getItem("user")))
+    }
+
+  },[])
 
   return (
     <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"(500px"}}>
 
-      <div className="body-bg">
+      <div className="body-bg-login">
 
 
-        <form className="form-config">
-          <div class="form-group">
+        <form className="form-config-login">
+          <div className="form-group">
             <label for="exampleInputEmail1">Adresse Mail</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer votre email"/>
+            <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Entrer votre email" value={signInData.email} onChange={(e)=> {
+                var copysignInData = {...signInData}
+                copysignInData.email = e.target.value
+                setSignInData(copysignInData)
+            } }/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="exampleInputPassword1">Mot de passe</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe"/>
+            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Mot de passe" value={signInData.password} onChange={(e)=> {
+                var copysignInData = {...signInData}
+                copysignInData.password = e.target.value
+                setSignInData(copysignInData)
+            } }/>
           </div>
-          <div class="form-group form-check">
+          <div className="form-group form-check">
+            <Link className="form-check-label" to="/inscription">S'inscrire</Link>
+          </div>
 
-            <a href="" class="form-check-label">S'inscrire</a>
-          </div>
-          <button style={{marginBottom:"15px"}} type="submit" class="btn btn-primary">Connexion</button>
+          {islog.getResultFetchSignin.error != undefined  ?  <div>{islog.getResultFetchSignin.error}</div>  : <div></div>}
+
+          <button style={{marginBottom:"15px"}} className="btn btn-primary" onClick={(event)=>{
+            event.preventDefault()
+            islog.signin(signInData.email,signInData.password,()=>{setActualisationPage(!actualisationPage)})
+          }} >Connection</button>
+
+
         </form>
+
+        {islog.islog ? <Redirect to="/appart" /> : <div></div>}
 
       </div>
 

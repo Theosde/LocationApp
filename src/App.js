@@ -8,10 +8,10 @@ import Index from "./components/index";
 import Signup from "./components/signup";
 import Card from "./components/card";
 
+import Upload from "./components/uploadfile";
+
 
 import url from './config';
-
-
 
 import { createBrowserHistory } from "history"
 
