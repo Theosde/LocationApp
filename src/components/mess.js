@@ -18,11 +18,6 @@ function Message() {
       <div className="column-one">
 
         <div className="contact-line" onClick={()=>{
-          var element = document.getElementsByClassName('loc-short-message')
-          for (var i = 0; i < element.length; i++) {
-            element[i].style.display = element[i].style.display === 'none' ? 'block' : 'none';
-          }
-
 
         }}>
 

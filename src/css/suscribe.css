@@ -1,7 +1,8 @@
 .body-bg-suscribe{
   background-image: url("../img/whitebg.jpg");
   width: 100%;
-  height: 100vh!important;
+  height: auto;
+  padding: 50px 0;
   background-size: cover;
   display: flex;
   justify-content: center!important;
@@ -34,8 +35,6 @@ body{
 .form-org-1 .form-group{
   width: 50%!important;
 }
-
-
 
 button{
   margin-left: 25%;
@@ -74,7 +73,6 @@ a:hover{
     margin: 5px 10px;
     width: 80%;
   }
-
 
   .form-org-1{
     display: flex;

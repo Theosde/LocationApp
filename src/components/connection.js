@@ -45,7 +45,6 @@ function Connection({match}) {
 
       <button onClick={()=>{
         islog.signin(signInData.email,signInData.password,()=>{setVerifsession(!verifsession)})
-
       }} >Connection</button>
 
       {

@@ -10,10 +10,10 @@ import Card from "./components/card";
 import Info from "./components/myinfo";
 import Message from "./components/mess";
 
+import Upload from "./components/uploadfile";
+
 
 import url from './config';
-
-
 
 import { createBrowserHistory } from "history"
 
@@ -32,6 +32,7 @@ function App() {
           <Route  path="/appart" component={(props) => <Card {...props} /> } />
           <Route  path="/info" component={(props) => <Info {...props} /> } />
           <Route  path="/messages" component={(props) => <Message {...props} /> } />
+          <Route  path="/documents" component={(props) => <Upload {...props} /> } />
         </Switch>
     </Router>
   </div>
