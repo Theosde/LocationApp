@@ -7,7 +7,6 @@ import "../css/info.css";
 
 
 
-
 function Info() {
 
 

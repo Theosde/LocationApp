@@ -1,12 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from "./header";
 import Footer from "./footer";
 import "../css/message.css";
 
 
+import socketIOClient from "socket.io-client";
 
 
 function Message() {
+
+  const[listMessage,setListMessage] = useState([])
+  const[inputMessage,setInputMessage] = useState("")
+
+  var socket;
+  socket = socketIOClient('http://localhost:3000/ssssssssss')
+
+  useEffect(()=>{
+    console.log("effect");
+      socket.on("sendMessage", (msg)=>{
+        console.log(msg);
+      })
+  },[socket])
+
+
+
 
 
 
@@ -56,32 +73,29 @@ function Message() {
           <div className="nouveau-message">
             <div className="message-box-me">Bonjour, Ui je vous le met à disposition sur le site en telechargement d'ici ce soir, si vous avez d'autres demande je reste joignable sur ce reseaux</div>
           </div>
-          <div className="ancien-message">
-            <div className="message-box">Merci bien ! Bonne journée à vous.</div>
-          </div>
-          <div className="nouveau-message">
-            <div className="message-box-me">Bonjour, Ui je vous le met à disposition sur le site en telechargement d'ici ce soir, si vous avez d'autres demande je reste joignable sur ce reseaux</div>
-          </div>
-          <div className="ancien-message">
-            <div className="message-box">Merci bien ! Bonne journée à vous.</div>
-          </div>
-          <div className="nouveau-message">
-            <div className="message-box-me">Bonjour, Ui je vous le met à disposition sur le site en telechargement d'ici ce soir, si vous avez d'autres demande je reste joignable sur ce reseaux</div>
-          </div>
-          <div className="ancien-message">
-            <div className="message-box">Merci bien ! Bonne journée à vous.</div>
-          </div>
-          <div className="nouveau-message">
-            <div className="message-box-me">Bonjour, Ui je vous le met à disposition sur le site en telechargement d'ici ce soir, si vous avez d'autres demande je reste joignable sur ce reseaux</div>
-          </div>
-          <div className="ancien-message">
-            <div className="message-box">Merci bien ! Bonne journée à vous.</div>
-          </div>
+
+          {listMessage.map(e => {
+            return  <div className="ancien-message">
+                      <div className="message-box">{e}</div>
+                    </div>
+          })}
         </div>
 
         <div className="send-mess">
-          <textarea className="type-zone" type="textarea"></textarea>
-          <div className="send-mess-btn">Envoyer</div>
+          <textarea className="type-zone" type="textarea" type="text" value={inputMessage} onChange={(e)=> {
+              var copysignInData = {...inputMessage}
+              copysignInData = e.target.value
+              setInputMessage(copysignInData)
+          } }/>
+
+          <div className="send-mess-btn" onClick={()=> {
+
+            var perso = JSON.parse(sessionStorage.getItem("user"))
+            console.log(perso.firstname);
+            socket.emit("sendMessage", {msg:inputMessage, from:perso.firstname})
+
+          }}>Envoyer</div>
+
         </div>
       </div>
     </div>

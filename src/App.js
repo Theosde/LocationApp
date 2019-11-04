@@ -14,6 +14,7 @@ import AddLogement from "./components/addLogement";
 
 
 import Upload from "./components/uploadfile";
+import AddAppart from "./components/addAppart";
 
 
 import url from './config';
@@ -35,7 +36,6 @@ function App() {
           <Route  path="/appart" component={(props) => <Card {...props} /> } />
           <Route  path="/info" component={(props) => <Info {...props} /> } />
           <Route  path="/messages" component={(props) => <Message {...props} /> } />
-          <Route  path="/documents" component={(props) => <Upload {...props} /> } />
           <Route  path="/documents" component={(props) => <Upload {...props} /> } />
           <Route path="/add" component={(props) => <AddLogement {...props} /> } />
           <Route path="/detailedcard" component={(props) => <DetailedCard {...props} /> } />
