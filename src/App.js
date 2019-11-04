@@ -11,6 +11,7 @@ import Info from "./components/myinfo";
 import Message from "./components/mess";
 
 import Upload from "./components/uploadfile";
+import AddAppart from "./components/addAppart";
 
 
 import url from './config';
@@ -33,6 +34,7 @@ function App() {
           <Route  path="/info" component={(props) => <Info {...props} /> } />
           <Route  path="/messages" component={(props) => <Message {...props} /> } />
           <Route  path="/documents" component={(props) => <Upload {...props} /> } />
+          <Route  path="/addAppart" component={(props) => <AddAppart {...props} /> } />
         </Switch>
     </Router>
   </div>
