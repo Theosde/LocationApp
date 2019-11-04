@@ -42,8 +42,8 @@ function Message() {
             <p>Le versement de ce mois ci est bien fait à ce jour .</p>
           </div>
           <div className="loc-short-message">
-            <h4>Marion Laureta</h4>
-            <p>J'ai un amis qui voudrais rejoindre de la collocation ...</p>
+            <h4>Laure St-Genis</h4>
+            <p>Merci de m'avoir accepté dans votre appartement ...</p>
           </div>
 
       </div>

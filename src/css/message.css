@@ -40,11 +40,15 @@ h5{
   padding: 10px;
   border-bottom: 2px solid #EFEFEF;
   height: 100px;
+  transition: 0.2s;
 }
 
 .contact-line:hover{
   cursor: pointer;
-  background-color: rgba(0,0,0,0.1);
+  background-image:-webkit-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  background-image:-o-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  background-image:linear-gradient(to top right, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  color: white;
 }
 
 .loc-short-message{
@@ -52,11 +56,15 @@ h5{
   padding: 10px;
   border-bottom: 2px solid #EFEFEF;
   height: 100px;
+  transition:0.2s;
 }
 
 .loc-short-message:hover{
   cursor: pointer;
-  background-color: rgba(0,0,0,0.1);
+  background-image:-webkit-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  background-image:-o-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  background-image:linear-gradient(to top right, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  color: white;
 }
 
 .message-box{
@@ -70,7 +78,7 @@ h5{
 .message-box-me{
   max-width: 450px;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 25px;
   background-image:-webkit-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
   background-image:-o-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
   background-image:linear-gradient(to top right, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
@@ -122,8 +130,8 @@ h5{
   background-image:-o-linear-gradient(bottom left, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
   background-image:linear-gradient(to top right, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
   color: white;
-  border-radius: 5px;
-  padding: 5px 20px;
+  border-radius: 25px;
+  padding: 5px 30px;
 }
 
 .send-mess-btn:hover{

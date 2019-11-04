@@ -7,8 +7,11 @@ import Login from "./components/login";
 import Index from "./components/index";
 import Signup from "./components/signup";
 import Card from "./components/card";
+import DetailedCard from "./components/detailedcard";
 import Info from "./components/myinfo";
 import Message from "./components/mess";
+import AddLogement from "./components/addLogement";
+
 
 import Upload from "./components/uploadfile";
 
@@ -33,6 +36,9 @@ function App() {
           <Route  path="/info" component={(props) => <Info {...props} /> } />
           <Route  path="/messages" component={(props) => <Message {...props} /> } />
           <Route  path="/documents" component={(props) => <Upload {...props} /> } />
+          <Route  path="/documents" component={(props) => <Upload {...props} /> } />
+          <Route path="/add" component={(props) => <AddLogement {...props} /> } />
+          <Route path="/detailedcard" component={(props) => <DetailedCard {...props} /> } />
         </Switch>
     </Router>
   </div>

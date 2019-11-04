@@ -1,0 +1,54 @@
+.body-bg-detailedcard{
+  background-image: url("../img/whitebg.jpg");
+  width: 100%;
+  padding: 35px 0;
+  height: auto!important;
+  background-size: cover;
+  display: flex;
+  justify-content: center!important;
+  align-items: center;
+  flex-direction: column;
+}
+
+.detailedcard{
+  height: auto;
+  min-width: 80%;
+  margin: 10%;
+  background-color: white;
+  display: flex;
+  border: 2px solid #EFEFEF;
+  border-radius: 15px;
+  margin: 15px 15px;
+  transition: 1s;
+}
+
+.detailed-img-container{
+  width: 100%;
+}
+
+.detailed-img{
+  margin: 1%;
+  height: 350px;
+  width: 98%;
+  border-radius: 15px;
+}
+
+.detailed-name-card{
+  height: 100px;
+  width: 80%;
+  margin: 0 10%;
+  border: 2px solid #EFEFEF;
+  border-radius: 15px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailed-name-card h1{
+  margin-bottom: 0px;
+  font-size: 25px;
+  background: -webkit-linear-gradient(#5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
