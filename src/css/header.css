@@ -4,8 +4,7 @@
   align-items: center;
   height: 70px;
   background: rgb(2,0,36);
-  background-image: linear-gradient(to right top, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb); 
-  border-bottom: 2px solid white;
+  background-image: linear-gradient(to right top, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   position: sticky;
   top:0;
   z-index:1;
@@ -91,8 +90,7 @@ a{
     align-items: flex-start;
     height: auto;
     background: rgb(2,0,36);
-    background-image: linear-gradient(to right top, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb);
-    border-bottom: 2px solid white;
+    background-image: linear-gradient(to right top, #6b5fb8, #5e31c4, #7912eb, #7912eb);
     top:0;
     z-index:1;
   }
