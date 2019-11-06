@@ -14,10 +14,6 @@ function DetailedCard() {
 
   const[basicState,setbasicState] = useState(false);
 
-<<<<<<< HEAD
-=======
-console.log(basicState);
->>>>>>> a28a8935355ba5375d2d11275addf15da06cb146
   return (
   <div>
     <Header/>
