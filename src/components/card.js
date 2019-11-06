@@ -62,7 +62,7 @@ function Card() {
 
     console.log();
 
-    return <Link key={id} style={{textDecoration:'none'}}to="/detailedcard"><div className="card">
+    return <Link key={id} style={{textDecoration:'none'}} to={"/detailedcard/"+e._id}><div className="card">
       <div><img className="img" src={e.photo[0]}></img></div>
       <div className="title">
         <div>{e.titre}</div>

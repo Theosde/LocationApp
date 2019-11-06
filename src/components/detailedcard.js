@@ -10,9 +10,14 @@ import url from '../config';
 
 
 
-function DetailedCard() {
+function DetailedCard(props) {
 
   const[basicState,setbasicState] = useState(false);
+
+
+
+
+  console.log("props",props.match.params.idappart);
 
   return (
   <div>
