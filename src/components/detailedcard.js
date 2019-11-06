@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../css/detailedcard.css";
 import "../css/add.css";
 
+import url from '../config';
 
 
 
 
 function DetailedCard() {
-
 
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from "./header";
 import Footer from "./footer";
 import "../css/info.css";
@@ -8,6 +8,42 @@ import "../css/info.css";
 
 
 function Info() {
+
+  const[userData,setUserData] = useState({})
+
+  useEffect(()=>{
+    if ( JSON.parse(sessionStorage.getItem("user")) == null ) {
+      console.log("localStorage vide");
+    }else {
+      console.log("localStorage", JSON.parse(sessionStorage.getItem("user")) );
+      setUserData(JSON.parse(sessionStorage.getItem("user")))
+    }
+  },[])
+
+
+  console.log(userData);
+
+
+  //DATE LIVRAISON
+  var date = new Date(userData.birthday);
+
+  //console.log("date",date)
+
+  var jour = "00";
+  var mois = "00";
+  var année = date.getFullYear();
+
+  if(date.getDate() < 10){
+  jour = '0'+ date.getDate()
+  }else{jour = date.getDate()
+  }
+
+  if(date.getMonth() < 10){
+    mois = '0' + (date.getMonth()+1)
+  }else{
+    mois = (date.getMonth()+1)
+  }
+
 
 
 
@@ -28,11 +64,11 @@ function Info() {
           </div>
 
           <div className="filled-infos-col">
-            <div className="filled-name">REY</div>
-            <div className="filled-surname">ARNAUD</div>
-            <div className="filled-birthdate">25/02/1987</div>
-            <div className="filled-phone"><p>06.28.3.3.20.17</p></div>
-            <div className="filled-mail"><p>arnaud.rey.job@gmail.com</p></div>
+            <div className="filled-name">{userData.lastname}</div>
+            <div className="filled-surname">{userData.firstname}</div>
+            <div className="filled-birthdate">{jour+'/'+mois+'/'+année}</div>
+            <div className="filled-phone"><p>{userData.phone}</p></div>
+            <div className="filled-mail"><p>{userData.email}</p></div>
           </div>
 
 
