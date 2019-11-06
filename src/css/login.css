@@ -40,7 +40,7 @@ button{
 }
 .btn-primary{
   border-style: none;
-  background-image:linear-gradient(to right top, #5f0c74, #6b078f, #7405ab, #7a08ca, #7b12eb)!important;
+  background-image:linear-gradient(to right top, #6b5fb8, #5e31c4, #7912eb, #7912eb)!important;
   border-radius: 25px;
 }
 
