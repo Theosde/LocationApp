@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "./header";
 import Footer from "./footer";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -11,8 +11,9 @@ import "../css/add.css";
 
 function DetailedCard() {
 
+  const[basicState,setbasicState] = useState(false);
 
-
+console.log(basicState);
   return (
   <div>
     <Header/>
@@ -33,25 +34,26 @@ function DetailedCard() {
           <div className="locataire">
             <div className="loc-name">Anais Chedania</div>
             <div className="loc-infos">Tél: 07.56.78.90.01 / Mail:Anaiiiis@gmail.com</div>
-            <div className="more-infos-btn"></div>
+            <div className="more-infos-btn" onClick={() => setbasicState(!basicState)}></div>
             <div className="delete-loc"></div>
           </div>
-          <div className="depliant">
+          {basicState ?<div className="depliant">
             <div className="garant"> Garant :</div>
             <div className="garant-name">Arnaud REY</div>
             <div className="loc-infos">Tél:07.56.78.90.01</div>
             <div className="loc-infos">Mail:arey@gmail.com</div>
-          </div>
+          </div> : <div></div>}
+
           <div className="locataire">
             <div className="loc-name">Laure St Genis</div>
             <div className="loc-infos">Tél: 06.28.33.20.18 / Mail:LaureStgensi@gmail.com</div>
-            <div className="more-infos-btn"></div>
+            <div className="more-infos-btn" onClick></div>
             <div className="delete-loc"></div>
           </div>
           <div className="locataire">
             <div className="loc-name">Charlotte Renard</div>
             <div className="loc-infos">Tél: 06.31.33.28.98 / Mail:LaureStgensi@gmail.com</div>
-            <div className="more-infos-btn"></div>
+            <div className="more-infos-btn" onClick></div>
             <div className="delete-loc"></div>
           </div>
         </div>
