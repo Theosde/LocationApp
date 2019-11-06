@@ -1,15 +1,86 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from "./header";
 import Footer from "./footer";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../css/card.css";
 import "../css/add.css";
 
+import url from '../config';
+
 
 
 
 
 function Card() {
+
+  const[userData,setUserData] = useState({})
+  const[allAppart,setAllAppart] = useState([])
+
+
+  useEffect(()=>{
+    if ( JSON.parse(sessionStorage.getItem("user")) == null ) {
+      console.log("localStorage vide");
+    }else {
+      console.log("localStorage", JSON.parse(sessionStorage.getItem("user")) );
+      setUserData(JSON.parse(sessionStorage.getItem("user")))
+    }
+  },[])
+
+
+  useEffect(()=>{
+    if (userData._id != undefined) {
+
+      console.log(userData._id);
+      fetch(url+"mesAppart", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({idproprio:userData._id})
+      }).then(res => {
+        console.log(res)
+        return res.json()
+      }).then(data => {
+        console.log("retour find Appart du Proprio",data)
+        setAllAppart(data.findAppart)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  },[userData])
+
+
+
+
+  console.log("allAppart",allAppart);
+
+
+  var mapDataAppart = allAppart.map((e,id) => {
+
+    console.log("e",e);
+
+    console.log();
+
+    return <Link key={id} style={{textDecoration:'none'}}to="/detailedcard"><div className="card">
+      <div><img className="img" src={e.photo[0]}></img></div>
+      <div className="title">
+        <div>{e.titre}</div>
+        <div>-</div>
+        <div> {e.idlocataire.length != e.nbmaxlocataire ? "A LOUER" : "OCCUPE" }</div>
+      </div>
+      <div className="type">
+        <div>{e.categorie}</div>
+        <div>{e.meuble ? "Meublé" : "Pas Meublé"}</div>
+        <div>{e.surface+"m2"}</div>
+      </div>
+      <div className="price">
+        <div>{e.prix+" euros / mois"} </div>
+        <div>{e.charge ? "Avec Charge" : "Hors Charge"}</div>
+      </div>
+    </div></Link>
+
+  })
 
 
 
@@ -22,61 +93,9 @@ function Card() {
 
             <Link to="/add"><div className="addcard"></div></Link>
 
+            {mapDataAppart}
 
 
-            <Link style={{textDecoration:'none'}}to="/detailedcard"><div className="card">
-              <div><img className="img" src="/images/annonce-img.jpg"></img></div>
-              <div className="title">
-                <div>LYON</div>
-                <div>-</div>
-                <div>A LOUER</div>
-              </div>
-              <div className="type">
-                <div>T3</div>
-                <div>Meublé</div>
-                <div>72m2</div>
-              </div>
-              <div className="price">
-                <div>450 euros / mois </div>
-                <div>hors charge</div>
-              </div>
-            </div></Link>
-
-            <div className="card">
-              <div><img className="img" src="/images/pic-2.jpg"></img></div>
-              <div className="title">
-                <div>CASSIS</div>
-                <div>-</div>
-                <div>OCCUPE</div>
-              </div>
-              <div className="type">
-                <div>VILLA</div>
-                <div>Meublé</div>
-                <div>110m2</div>
-              </div>
-              <div className="price">
-                <div>1250 euros / mois </div>
-                <div>hors charge</div>
-              </div>
-            </div>
-
-            <div className="card">
-              <div><img className="img" src="/images/annonce-img.jpg"></img></div>
-              <div className="title">
-                <div>LYON</div>
-                <div>-</div>
-                <div>A LOUER</div>
-              </div>
-              <div className="type">
-                <div>T3</div>
-                <div>Meublé</div>
-                <div>72m2</div>
-              </div>
-              <div className="price">
-                <div>450 euros / mois </div>
-                <div>hors charge</div>
-              </div>
-            </div>
       </div>
     </div>
     <Footer/>
