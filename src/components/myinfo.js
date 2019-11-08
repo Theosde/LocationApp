@@ -4,6 +4,11 @@ import Footer from "./footer";
 import "../css/info.css";
 
 
+import {Image} from 'cloudinary-react';
+
+
+
+import url from '../config';
 
 
 
@@ -46,6 +51,50 @@ function Info() {
 
 
 
+// UPLOAD
+
+
+const[dataFile,setDataFile] = useState({})
+
+
+var handleChangeFile = (event) => {
+  console.log("data file",event.target.files[0]);
+  setDataFile(event.target.files[0])
+}
+
+var handleClickConfirm = (event) => {
+
+  console.log("hello jai confirmer");
+
+  const data = new FormData()
+  data.append('file', dataFile)
+
+
+  fetch(url+"upload_rib/"+userData._id, {
+    method: 'post',
+    body: data
+  }).then(res => {
+    console.log(res)
+    return res.json()
+  }).then(picture => {
+    console.log("retour fetch upload",picture)
+
+  }).catch(err => {
+    console.log(err)
+  })
+
+
+}
+
+if (userData != undefined) {
+  console.log(userData._id);
+console.log("userdata info ok");
+}else {
+  console.log("userdata info AAAAAAAAAAAAAAAAA");
+
+}
+
+console.log("rib/"+userData._id);
 
   return (
   <div>
@@ -81,8 +130,11 @@ function Info() {
 
       <div className="main-info-rib">
         <div>R.I.B</div>
-        <input type="file" name="file"/>
-        <button className="upload-rib-btn" type="button" >Upload</button>
+
+        <Image cloudName="dyt3mhoy6" publicId={"https://res.cloudinary.com/dyt3mhoy6/rib/RIB-"+userData._id} width="300" crop="scale"/>
+
+        <input type="file" name="file" onChange={handleChangeFile}/>
+        <button className="upload-rib-btn" type="button" onClick={handleClickConfirm} >Upload</button>
       </div>
 
 
