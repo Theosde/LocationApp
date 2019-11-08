@@ -49,7 +49,7 @@ function DetailedCard(props) {
         console.log("retour find Appart du Proprio",data)
 console.log(data.findAppart.idlocataire.length);
 console.log(allLocataire.length);
-if(data.findAppart.idlocataire.length == allLocataire.length){
+if(data.findAppart.idlocataire.length == allLocataire.length & data.findAppart.idlocataire.length > 0 & allLocataire.length > 0){
   setStateErrorAddLocataire(<div className='errorMessAddLoc'>Le locataire que vous essayez d'ajouter n'existe pas ou à déja été ajouté</div>)
 };
 
