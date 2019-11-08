@@ -130,11 +130,20 @@ h5{
   background-image:-o-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   background-image:linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   color: white;
+  border:2px solid #7912eb;
   border-radius: 25px;
   padding: 5px 30px;
 }
 
 .send-mess-btn:hover{
+  background-image:-webkit-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:-o-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:linear-gradient(to top right, #fff, #fff, #fff, #fff);
+  color: #7912eb;
+  border: 2px solid ;
+  border-image: -webkit-linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  border-radius: 25px;
+  padding: 5px 30px;
   cursor: pointer;
 }
 

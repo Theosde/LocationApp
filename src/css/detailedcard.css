@@ -96,17 +96,17 @@
 }
 .depliant{
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding-bottom:15px;
   padding-top:15px;
-  width: 30%;
+  width: 100%;
 }
 .garant-name{
-width: 25%;
-height: 44px;
-display: flex;
-align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .locataire{
@@ -120,6 +120,10 @@ align-items: center;
 
 .garant{
   font-weight: bold;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loc-name{
@@ -133,6 +137,13 @@ padding-left: 10px;
 width: 41%;
 display: flex;
 align-items: center;
+}
+
+.garant-infos{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .more-infos-btn{
   width: 17%;
@@ -206,6 +217,17 @@ align-items: center;
   width: 50%;
 }
 
+.errorMessAddLoc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255,0,0,0.2);
+  width:80%;
+  margin: 0 10%;
+  border: 2px solid red;
+  border-radius: 10px;
+  height: 40px;
+}
 
 @media screen and (max-width: 760px){
   .detailed-name-card{

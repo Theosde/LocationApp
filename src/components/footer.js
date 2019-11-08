@@ -8,7 +8,7 @@ function Footer() {
 
   return (
     <div className="footer-bg">
-
+      All right reserved to @ REY Arnaud and LASSIAS Theo
     </div>
   );
 }

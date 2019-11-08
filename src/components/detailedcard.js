@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from "./header";
 import Footer from "./footer";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -13,78 +13,179 @@ import url from '../config';
 function DetailedCard(props) {
 
   const[basicState,setbasicState] = useState(false);
+  const[infosAppart,setStateInfosAppart] = useState({});
+  const[infosAdress,setStateInfosAdress] = useState({});
+  const[inputEmail,setStateInputEmail] = useState('');
+  const[allLocataire,setStateAllLocataire] = useState([]);
+  const[actu,setStateActu] = useState(false);
+
+  const[userData,setUserData] = useState({})
+
+ const [errorAddLocataire,setStateErrorAddLocataire] = useState('')
+
+  useEffect(()=>{
+    if ( JSON.parse(sessionStorage.getItem("user")) == null ) {
+      console.log("localStorage vide");
+    }else {
+      console.log("localStorage", JSON.parse(sessionStorage.getItem("user")) );
+      setUserData(JSON.parse(sessionStorage.getItem("user")))
+    }
+  },[])
 
 
+  useEffect(()=>{
+      console.log('je suis dans le fetch');
+      fetch(url+"detailAppart", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({idappart:props.match.params.idappart})
+      }).then(res => {
+        console.log(res)
+        return res.json()
+      }).then(data => {
+        console.log("retour find Appart du Proprio",data)
+console.log(data.findAppart.idlocataire.length);
+console.log(allLocataire.length);
+if(data.findAppart.idlocataire.length == allLocataire.length){
+  setStateErrorAddLocataire(<div className='errorMessAddLoc'>Le locataire que vous essayez d'ajouter n'existe pas ou à déja été ajouté</div>)
+};
 
+
+        setStateInfosAppart (data.findAppart);
+        console.log(data.findAppart.adresse.rue);
+        setStateInfosAdress(data.findAppart.adresse);
+        setStateAllLocataire(data.findAppart.idlocataire);
+      }).catch(err => {
+        console.log(err)
+      })
+
+  },[actu])
+
+  var deleteLocataire = (emailLoca) =>{
+    console.log(emailLoca);
+
+    fetch(url+"supprLocataire", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({idAppart:props.match.params.idappart,email:emailLoca})
+    }).then(res => {
+      console.log(res)
+      return res.json()
+    }).then(data => {
+      console.log("retour find Appart du Proprio",data)
+      setStateActu(!actu);
+    }).catch(err => {
+      console.log(err)
+    })
+  };
+
+var addLoc = () =>{
+  fetch(url+"ajoutLocataire", {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({idAppart:infosAppart._id ,email:inputEmail})
+  }).then(res => {
+    console.log(res)
+    return res.json()
+  }).then(data => {
+    console.log("retour find Appart du Proprio",data)
+    setStateActu(!actu);
+    setStateErrorAddLocataire('')
+    setStateInputEmail('')
+  }).catch(err => {
+    console.log(err)
+  })
+};
 
   console.log("props",props.match.params.idappart);
+  console.log(infosAppart);
+
+  var mapAllLocat = allLocataire.map((e,id) => {
+
+    console.log("e",e);
+
+
+    return <div style={{width:'100%'}}>
+        <div className="locataire">
+          <div className="loc-name">{e.firstname} {e.lastname}</div>
+          <div className="loc-infos">Tél: {e.phone} / {e.email}</div>
+          <div className="more-infos-btn" onClick={() => {
+            setbasicState(!basicState)
+
+          }}></div>
+          <div className="delete-loc" onClick={() => deleteLocataire(e.email)}></div>
+        </div>
+        {basicState ?<div className="depliant">
+          <div className="garant"> Garant :</div>
+          <div className="garant-name">Arnaud REY</div>
+          <div className="garant-infos">Tél:07.56.78.90.01</div>
+          <div className="garant-infos">Mail:arey@gmail.com</div>
+        </div> : <div></div>}
+    </div>
+
+  })
+
+
+
 
   return (
   <div>
     <Header/>
     <div className="body-bg-detailedcard">
 
-      <div className="detailed-name-card"><h1>Loft Parisien - Rue des Lillas</h1></div>
+      <div className="detailed-name-card"><h1>{infosAppart.titre}</h1></div>
 
       <div className="detailedcard">
-        <div className="detailed-img-container"><img className="detailed-img" src="/images/annonce-img.jpg"></img></div>
+        <div className="detailed-img-container"><img className="detailed-img" src={infosAppart.photo}></img></div>
       </div>
 
       <div className="detailed-loc-card">
         <div className="up">
-          <input className="add-locataire" placeholder="Ajouter un locataire à mon logement"></input>
-          <div className="add-loc-btn">+</div>
-        </div>
-        <div className="down">
-          <div className="locataire">
-            <div className="loc-name">Anais Chedania</div>
-            <div className="loc-infos">Tél: 07.56.78.90.01 / Mail:Anaiiiis@gmail.com</div>
-            <div className="more-infos-btn" onClick={() => setbasicState(!basicState)}></div>
-            <div className="delete-loc"></div>
-          </div>
-          {basicState ?<div className="depliant">
-            <div className="garant"> Garant :</div>
-            <div className="garant-name">Arnaud REY</div>
-            <div className="loc-infos">Tél:07.56.78.90.01</div>
-            <div className="loc-infos">Mail:arey@gmail.com</div>
-          </div> : <div></div>}
+          <input className="add-locataire" placeholder="Ajouter un locataire à mon logement" value={inputEmail} onChange={(e)=> {
+              var copyinputEmail = {...inputEmail}
+              copyinputEmail= e.target.value
+              setStateInputEmail(copyinputEmail)
+          } }></input>
+          <div className="add-loc-btn" onClick={addLoc}>+</div>
 
-          <div className="locataire">
-            <div className="loc-name">Laure St Genis</div>
-            <div className="loc-infos">Tél: 06.28.33.20.18 / Mail:LaureStgensi@gmail.com</div>
-            <div className="more-infos-btn" onClick></div>
-            <div className="delete-loc"></div>
-          </div>
-          <div className="locataire">
-            <div className="loc-name">Charlotte Renard</div>
-            <div className="loc-infos">Tél: 06.31.33.28.98 / Mail:LaureStgensi@gmail.com</div>
-            <div className="more-infos-btn" onClick></div>
-            <div className="delete-loc"></div>
-          </div>
+        </div>
+        {errorAddLocataire}
+        <div className="down">
+          {mapAllLocat}
         </div>
       </div>
 
       <div className="detailed-infos-card">
         <div className="bien-infos">
           <div className="complete-infos">Description du bien : </div>
-          <div style={{marginBottom:'15px',textAlign: 'justify',textJustify: 'inter-word'}}> Le logement est idéalement situé près d'une zone commerciale et des école supérieurs. Dans un immeuble de moins de 5 ans. Il peut contenir jusqu'à 3 locataires en collocation ou une famille avec 2 enfants. 3 chambres disponible , cuisine , grand salon et sale de bain  et wc séparé ! Un design moderne et épuré dans la décoration.</div>
+          <div style={{marginBottom:'15px',textAlign: 'justify',textJustify: 'inter-word'}}> {infosAppart.desc}</div>
         </div>
         <div className="adress-infos">
           <div className="complete-adress">Adresse Complète :</div>
-          <div><strong>Pays :</strong> France </div>
-          <div> <strong>Cp :</strong> 69100 - Villeurbanne </div>
-          <div><strong>Rue :</strong> 2 rue de la fraternité</div>
+          <div><strong>Pays :</strong>{infosAdress.pays}</div>
+          <div> <strong>Cp :</strong> {infosAdress.codePostal}</div>
+          <div> <strong>Ville :</strong>{infosAdress.ville}</div>
+          <div><strong>Rue :</strong>{infosAdress.rue}</div>
         </div>
         <div className="bien-infos">
           <div className="complete-infos">Détails du bien : </div>
-          <div><strong>Type :</strong> T2 </div>
-          <div><strong>Meublé :</strong> Oui </div>
-          <div><strong>Surface:</strong> 110m2</div>
+          <div><strong>Type :</strong> {infosAppart.categorie}</div>
+          <div><strong>Meublé :</strong> {infosAppart.meuble ? "Meublé" : "Pas Meublé"}</div>
+          <div><strong>Surface:</strong> {infosAppart.surface} m2</div>
         </div>
         <div className="location-infos">
           <div className="complete-location">Détails de la location : </div>
-          <div><strong>Prix :</strong> 500 Euros/mois </div>
-          <div><strong>Charges :</strong> Comprises </div>
+          <div><strong>Prix :</strong> {infosAppart.prix}Euros/mois </div>
+          <div><strong>Charges :</strong>{infosAppart.charge ? "Avec Charge" : "Hors Charge"}</div>
           <div><strong>Disponibilité :</strong> Occupée</div>
         </div>
       </div>

@@ -39,6 +39,22 @@
 
 .upload-rib-btn{
   margin-left: 0px;
+  padding: 5px 25px;
+  border-radius: 25px;
+  border: 2px solid #7912eb!important;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 25px;
+}
+.upload-rib-btn:hover{
+  background-image:-webkit-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  color: #7912eb;
+  padding: 5px 25px;
+  border-radius: 25px;
+  border: 2px solid #7912eb;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 25px;
 }
 
 
@@ -115,8 +131,19 @@
   background-image: -o-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   background-image: linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   color: white;
+  border: 2px solid #7912eb;
   padding: 5px 25px;
   border-radius: 25px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 15px;
+}
+.modif-btn:hover{
+  background-image:-webkit-linear-gradient(bottom left, #fff, #fff, #fff, #fff);;
+  color: #7912eb;
+  padding: 5px 25px;
+  border-radius: 25px;
+  border: 2px solid #7912eb;
   cursor: pointer;
   margin-left: 5px;
   margin-top: 15px;

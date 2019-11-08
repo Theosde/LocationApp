@@ -52,6 +52,18 @@
   font-weight: bold;
 }
 
+.upload-btn:hover{
+  background-image:-webkit-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:-o-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:linear-gradient(to top right, #fff, #fff, #fff, #fff);
+  color: #7912eb;
+  border: 2px solid ;
+  border-image: -webkit-linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  border-radius: 25px;
+  padding: 5px 20px;
+  font-weight: bold;
+}
+
 
 h1{
   font-size: 30px;
