@@ -59,7 +59,7 @@ function Login({match}) {
 
         </form>
 
-        {islog.islog ? <Redirect to="/appart" /> : <div></div>}
+        {!islog.islog ? <div></div>  : islog.getResultFetchSignin.user.statususer == "locataire" ? <Redirect to="/monappart" /> : <Redirect to="/appart" /> }
 
       </div>
 

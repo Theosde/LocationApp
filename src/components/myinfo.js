@@ -71,7 +71,7 @@ var handleClickConfirm = (event) => {
 
 
   fetch(url+"upload_rib/"+userData._id, {
-    method: 'post',
+    method: 'POST',
     body: data
   }).then(res => {
     console.log(res)
