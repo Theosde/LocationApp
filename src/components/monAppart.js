@@ -5,12 +5,16 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../css/detailedcard.css";
 import "../css/add.css";
 
+import {Image} from 'cloudinary-react';
+
+
+
 import url from '../config';
 
 
 
 
-function DetailedCard(props) {
+function MonAppart(props) {
 
   const[basicState,setbasicState] = useState(false);
   const[infosAppart,setStateInfosAppart] = useState({});
@@ -18,8 +22,10 @@ function DetailedCard(props) {
   const[inputEmail,setStateInputEmail] = useState('');
   const[allLocataire,setStateAllLocataire] = useState([]);
   const[actu,setStateActu] = useState(false);
+  const[userData,setUserData] = useState({});
+  const [infosProprio,setInfosProprio] = useState ({});
 
-  const[userData,setUserData] = useState({})
+
 
  const [errorAddLocataire,setStateErrorAddLocataire] = useState('')
 
@@ -29,10 +35,13 @@ function DetailedCard(props) {
     }else {
       console.log("localStorage", JSON.parse(sessionStorage.getItem("user")) );
       setUserData(JSON.parse(sessionStorage.getItem("user")))
+      setInfosProprio(JSON.parse(sessionStorage.getItem("user")).appartement[0].idproprio)
     }
   },[])
 
 
+
+console.log("infosProprio",infosProprio.lastname);
   useEffect(()=>{
       console.log('je suis dans le fetch');
       fetch(url+"detailAppart", {
@@ -47,11 +56,11 @@ function DetailedCard(props) {
         return res.json()
       }).then(data => {
         console.log("retour find Appart du Proprio",data)
-console.log(data.findAppart.idlocataire.length);
-console.log(allLocataire.length);
-if(data.findAppart.idlocataire.length == allLocataire.length & data.findAppart.idlocataire.length > 0 & allLocataire.length > 0){
-  setStateErrorAddLocataire(<div className='errorMessAddLoc'>Le locataire que vous essayez d'ajouter n'existe pas ou à déja été ajouté</div>)
-};
+        console.log(data.findAppart.idlocataire.length);
+        console.log(allLocataire.length);
+        if(data.findAppart.idlocataire.length == allLocataire.length & data.findAppart.idlocataire.length > 0 & allLocataire.length > 0){
+          setStateErrorAddLocataire(<div className='errorMessAddLoc'>Le locataire que vous essayez d'ajouter n'existe pas ou à déja été ajouté</div>)
+        };
 
 
         setStateInfosAppart (data.findAppart);
@@ -144,26 +153,17 @@ var addLoc = () =>{
 
       <div className="detailed-name-card"><h2>{infosAppart.titre}</h2></div>
 
-      <div className="detailedcard">
+      {userData.statususer=='proprio'?<div className="detailedcard">
         <div className="detailed-img-container"><img className="detailed-img" src={infosAppart.photo}></img></div>
-      </div>
+      </div>:<div className="detailed-infos-card"><div><strong>Nom :</strong>{infosProprio.lastname}</div><div><strong>Prénom :</strong>{infosProprio.firstname}</div><div><strong>Email : </strong>{infosProprio.email}</div></div>}
 
-      <div className="detailed-loc-card">
-        <div className="up">
-          <input className="add-locataire" placeholder="Ajouter un locataire à mon logement" value={inputEmail} onChange={(e)=> {
-              var copyinputEmail = {...inputEmail}
-              copyinputEmail= e.target.value
-              setStateInputEmail(copyinputEmail)
-          } }></input>
-          <div className="add-loc-btn" onClick={addLoc}>+</div>
+      {userData.statususer=='locataire'?<div className="detailed-infos-card">
+        <div>R.I.B</div>
 
-        </div>
-        {errorAddLocataire}
-        <div className="down">
-          {mapAllLocat}
-        </div>
-      </div>
-    
+        <Image cloudName="dyt3mhoy6" publicId={"https://res.cloudinary.com/dyt3mhoy6/rib/RIB-"+userData._id} width="600" crop="scale"/>
+
+      </div>:<div></div>}
+
 
       <div className="detailed-infos-card">
         <div className="bien-infos">
@@ -201,4 +201,4 @@ var addLoc = () =>{
 
 }
 
-export default DetailedCard;
+export default MonAppart;

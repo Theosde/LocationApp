@@ -11,6 +11,7 @@ import DetailedCard from "./components/detailedcard";
 import Info from "./components/myinfo";
 import Message from "./components/mess";
 import AddLogement from "./components/addLogement";
+import MonAppart from './components/monAppart';
 
 
 import Upload from "./components/uploadfile";
@@ -34,6 +35,7 @@ function App() {
           <Route  path="/connection" component={(props) => <Login {...props} /> } />
           <Route  path="/inscription" component={(props) => <Signup {...props} /> } />
           <Route  path="/appart" component={(props) => <Card {...props} /> } />
+          <Route  path="/monappart/:idappart" component={(props) => <MonAppart {...props} /> } />
           <Route  path="/info" component={(props) => <Info {...props} /> } />
           <Route  path="/messages" component={(props) => <Message {...props} /> } />
           <Route  path="/documents" component={(props) => <Upload {...props} /> } />

@@ -23,6 +23,34 @@
   justify-content: space-between;
 }
 
+input[type='radio']:checked:after {
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      top: -2px;
+      left: -1px;
+      position: relative;
+      background-image:-webkit-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb)!important;
+      background-image:-o-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb)!important;
+      background-image:linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb)!important;
+      content: '';
+      display: inline-block;
+      visibility: visible;
+}
+
+.main-info-doc-3{
+  background: white;
+  width: 80%;
+  height: auto;
+  border-radius: 15px;
+  border: 1px solid #D5D7D9;
+  padding: 25px;
+  margin: 25px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .main-info-doc-2{
   background: white;
   width: 80%;
@@ -47,6 +75,8 @@
   background-image:-o-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   background-image:linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   color: white;
+  border: 2px solid ;
+  border-image: -webkit-linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   border-radius: 25px;
   padding: 5px 20px;
   font-weight: bold;
@@ -66,11 +96,18 @@
 
 
 h1{
+  background-image:-webkit-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  background-image:-o-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  background-image:linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
   font-size: 30px;
+  color: white;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
+  padding: 5px 20px;
+  font-weight: bold;
   margin-bottom: 30px;
+  border-radius: 5px;
 }
 
 
@@ -121,6 +158,8 @@ h1{
     background-image:-o-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
     background-image:linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
     color: white;
+    border: 2px solid ;
+    border-image: -webkit-linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
     border-radius: 25px;
     padding: 5px 20px;
     font-weight: bold;

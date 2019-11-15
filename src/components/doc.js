@@ -6,6 +6,17 @@ import "../css/doc.css";
 
 function Documents() {
 
+    const[userData,setUserData] = useState({})
+
+  useEffect(()=>{
+    if ( JSON.parse(sessionStorage.getItem("user")) == null ) {
+      console.log("localStorage vide");
+    }else {
+      console.log("localStorage", JSON.parse(sessionStorage.getItem("user")) );
+      setUserData(JSON.parse(sessionStorage.getItem("user")))
+    }
+  },[])
+
   return (
   <div>
     <Header/>
