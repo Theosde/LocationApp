@@ -149,10 +149,18 @@
   margin-top: 15px;
 }
 
+.uploaded-rib{
+  width: 600px;
+}
+
 @media screen and (max-width: 760px){
   p{
     margin-bottom: 0px;
   }
+  .uploaded-rib{
+    width: 350px;
+  }
+
   .modif-btn{
     display: none;
   }

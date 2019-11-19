@@ -131,7 +131,7 @@ console.log("rib/"+userData._id);
       {userData.statususer=='proprio'?<div className="main-info-rib">
         <div>R.I.B</div>
 
-        <Image cloudName="dyt3mhoy6" publicId={"https://res.cloudinary.com/dyt3mhoy6/rib/RIB-"+userData._id} width="600" crop="scale"/>
+        <Image cloudName="dyt3mhoy6" className="uploaded-rib" publicId={"https://res.cloudinary.com/dyt3mhoy6/rib/RIB-"+userData._id} width="600" crop="scale"/>
 
         <input type="file" name="file" onChange={handleChangeFile}/>
         <button className="upload-rib-btn" type="button" onClick={handleClickConfirm} >Upload</button>

@@ -54,8 +54,10 @@
 
 .detailed-name-card h2{
   margin-bottom: 0px;
-  font-size: 25px;
+  font-size: 45px;
   color:white;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .up{
@@ -169,6 +171,16 @@ align-items: center;
   margin-top: 30px;
   width: 80%;
 }
+.detailed-infos-card2{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px;
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 30px;
+  width: 80%;
+}
 
 .complete-adress{
   font-weight: bold;
@@ -217,6 +229,18 @@ align-items: center;
   width: 50%;
 }
 
+.delete-appart:hover{
+  background-image:-webkit-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:-o-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:linear-gradient(to top right, #fff, #fff, #fff, #fff);
+  color: #7912eb;
+  border: 2px solid ;
+  border-image: -webkit-linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  border-radius: 25px;
+  padding: 5px 20px;
+  font-weight: bold;
+}
+
 .errorMessAddLoc{
   display: flex;
   justify-content: center;
@@ -229,10 +253,31 @@ align-items: center;
   height: 40px;
 }
 
+.orga-column-proprio-infos{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 25px;
+}
+.detailed-infos-card-5{
+  display: flex;
+  padding: 25px;
+  background-color: white;
+  border-radius: 15px;
+  width: 80%;
+}
+
+
 @media screen and (max-width: 760px){
   .detailed-name-card{
     width: 94%;
   }
+
+  .detailed-infos-card2{
+    width: 94%;
+    margin-top: 0;
+  }
+
   .detailed-loc-card{
     min-width: 94%;
     margin: 3%;
@@ -240,7 +285,9 @@ align-items: center;
   .detailed-infos-card{
     min-width: 94%;
     margin: 3%;
+    align-items:  center;
   }
+
   .locataire{
     display: flex;
     flex-direction: column;
@@ -337,5 +384,25 @@ align-items: center;
     align-items: center;
     flex-direction: column;
     padding-bottom: 10px;
+  }
+
+  .orga-column-proprio-infos{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+  }
+  .detailed-infos-card-5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background-color: white;
+    border-radius: 15px;
+    width: 80%;
+  }
+
+  .bien-infos{
+    width: 100%;
   }
 }

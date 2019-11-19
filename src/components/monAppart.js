@@ -24,10 +24,13 @@ function MonAppart(props) {
   const[actu,setStateActu] = useState(false);
   const[userData,setUserData] = useState({});
   const [infosProprio,setInfosProprio] = useState ({});
+  const [dataRib,setDataRib] = useState ({});
 
 
 
  const [errorAddLocataire,setStateErrorAddLocataire] = useState('')
+
+
 
   useEffect(()=>{
     if ( JSON.parse(sessionStorage.getItem("user")) == null ) {
@@ -36,10 +39,11 @@ function MonAppart(props) {
       console.log("localStorage", JSON.parse(sessionStorage.getItem("user")) );
       setUserData(JSON.parse(sessionStorage.getItem("user")))
       setInfosProprio(JSON.parse(sessionStorage.getItem("user")).appartement[0].idproprio)
+      setDataRib(JSON.parse(sessionStorage.getItem("user")).appartement[0].idproprio.rib)
     }
   },[])
 
-
+console.log(dataRib.url);
 
 console.log("infosProprio",infosProprio.lastname);
   useEffect(()=>{
@@ -155,19 +159,33 @@ var addLoc = () =>{
 
       {userData.statususer=='proprio'?<div className="detailedcard">
         <div className="detailed-img-container"><img className="detailed-img" src={infosAppart.photo}></img></div>
-      </div>:<div className="detailed-infos-card"><div><strong>Nom :</strong>{infosProprio.lastname}</div><div><strong>Prénom :</strong>{infosProprio.firstname}</div><div><strong>Email : </strong>{infosProprio.email}</div></div>}
+      </div>:<div className="detailed-infos-card">
+            <h1>Informations de mon proprétaire</h1>
+            <div className="detailed-infos-card-5">
+            <div className="orga-column-proprio-infos">
+              <div><strong>Nom </strong></div>
+              <div><strong>Prénom </strong></div>
+              <div><strong>Email   </strong></div>
+            </div>
+            <div className="orga-column-proprio-infos">
+              <div> {infosProprio.lastname}</div>
+              <div> {infosProprio.firstname}</div>
+              <div> {infosProprio.email}</div>
+            </div>
+          </div>
+            </div>}
 
-      {userData.statususer=='locataire'?<div className="detailed-infos-card">
-        <div>R.I.B</div>
-
-        <Image cloudName="dyt3mhoy6" publicId={"https://res.cloudinary.com/dyt3mhoy6/rib/RIB-"+userData._id} width="600" crop="scale"/>
-
+      {userData.statususer=='locataire'?<div className="detailed-infos-card2">
+        <h1 style={{width:'100%'}}>R.I.B</h1>
+        <a href={dataRib.url} download>
+          <Image className="uploaded-rib" cloudName="dyt3mhoy6" publicId={dataRib.url} width="600" crop="scale" download/>
+        </a>
       </div>:<div></div>}
 
 
       <div className="detailed-infos-card">
         <div className="bien-infos">
-          <div className="complete-infos">Description du bien : </div>
+          <div style={{width:'100%'}} className="complete-infos"><h1 style={{width:'100%'}}>Description du bien</h1> </div>
           <div style={{marginBottom:'15px',textAlign: 'justify',textJustify: 'inter-word'}}> {infosAppart.desc}</div>
         </div>
         <div className="adress-infos">
