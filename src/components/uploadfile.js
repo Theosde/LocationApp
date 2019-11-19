@@ -16,7 +16,49 @@ function Upload() {
 
   const[dataFile,setDataFile] = useState({})
   const[valueInput,setValueInput] = useState("")
+  const[objetFile,setObjetFile] = useState("")
   const[userData,setUserData] = useState({})
+
+  const[userAndProprioData,setUserAndProprioData] = useState({})
+  // info appart Locataire
+  const[dataAppart,setDataAppart] = useState({})
+
+  // allLocataire
+  const[dataAllLocataire,setDataAllLocataire] = useState([])
+
+
+  const[reloadFetch,setReloadFetch] = useState(false)
+
+
+  // DOC envoyer
+  const[dataLocataireBail,setDataLocataireBail] = useState([])
+  const[dataLocataireCourrier,setDataLocataireCourrier] = useState([])
+  const[dataLocataireQuittance,setDataLocataireQuittance] = useState([])
+
+  const[mapBBail,setmapBBail] = useState([])
+  const[mapCCourrier,setmapCCourrier] = useState([])
+  const[mapQQuittance,setmapQQuittance] = useState([])
+
+
+  // DOC Recu
+  const[dataProprioBail,setDataProprioBail] = useState([])
+  const[dataProprioQuittance,setDataProprioQuittance] = useState([])
+  const[dataProprioCourrier,setDataProprioCourrier] = useState([])
+
+  const[MesBail,setMesBail] = useState([])
+  const[MesQuittance,setMesQuittance] = useState([])
+  const[MesCourrier,setMesCourrier] = useState([])
+
+
+  const[mapBail,setmapBail] = useState([])
+  const[mapCourrier,setmapCourrier] = useState([])
+
+  // pagination
+  const [targetPage, setTargetPage] = useState(1);
+  const [nbPage, setNbPage] = useState(0);
+
+  const [locataireChoose, setLocataireChoose] = useState("");
+
 
 
   useEffect(()=>{
@@ -28,6 +70,282 @@ function Upload() {
     }
   },[])
 
+  useEffect(()=>{
+
+    console.log("USEFFECT FETCH");
+
+    if (userData.statususer == "locataire") {
+
+      fetch(url+"infoUserAndProprio", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({idUser:userData._id})
+      }).then(res => {
+        console.log(res)
+        return res.json()
+      }).then(fetchData => {
+        console.log("retour fetch getInfoUserAndProprio",fetchData)
+        setUserAndProprioData(fetchData.user)
+        setDataAppart(fetchData.user.appartement[0])
+
+        setDataLocataireBail(fetchData.user.bail)
+        setDataLocataireCourrier(fetchData.user.courrier)
+
+        setDataProprioBail(fetchData.user.appartement[0].idproprio.bail)
+        setDataProprioQuittance(fetchData.user.appartement[0].idproprio.quittance)
+        setDataProprioCourrier(fetchData.user.appartement[0].idproprio.courrier)
+
+
+      }).catch(err => {
+        console.log(err)
+      })
+
+    }else if (userData.statususer == "proprio") {
+
+      fetch(url+"infoUser", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({idUser:userData._id})
+      }).then(res => {
+        console.log(res)
+        return res.json()
+      }).then(fetchData => {
+        console.log("retour fetch getInfoProprio",fetchData.user)
+
+        setUserAndProprioData(fetchData.user)
+
+        setDataLocataireBail(fetchData.user.bail)
+        setDataLocataireCourrier(fetchData.user.courrier)
+        setDataLocataireQuittance(fetchData.user.quittance)
+
+      }).catch(err => {
+        console.log(err)
+      })
+
+      //ALL Locataire
+      fetch(url+"allLocataire", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({idproprio:userData._id})
+      }).then(res => {
+        console.log(res)
+        return res.json()
+      }).then(fetchData => {
+        console.log("retour fetch allLocataire",fetchData.user)
+        setDataAllLocataire(fetchData.user)
+
+      }).catch(err => {
+        console.log(err)
+      })
+
+    }
+
+
+  },[userData,reloadFetch])
+
+
+
+
+    // save doc envoi
+    useEffect(()=>{
+      console.log("DATA DOC ENVOYER BAIL",dataLocataireBail);
+    },[dataLocataireBail])
+
+    useEffect(()=>{
+      console.log("DATA DOC ENVOYER COURRIER",dataLocataireCourrier);
+    },[dataLocataireCourrier])
+
+    useEffect(()=>{
+      console.log("DATA DOC ENVOYER QUITTANCE",dataLocataireQuittance);
+    },[dataLocataireQuittance])
+
+
+    // MesBail Proprio
+    useEffect(()=>{
+      console.log("dataProprioBail",dataProprioBail);
+      setMesBail(dataProprioBail.filter(e => {
+        return e.destinataire == userData._id
+      } ))
+
+    },[dataProprioBail])
+
+    useEffect(()=>{
+      console.log("MesBail",MesBail);
+
+    },[MesBail])
+
+    //Mes Quittance Proprio
+    useEffect(()=>{
+      console.log("dataProprioQuittance",dataProprioQuittance);
+      setMesQuittance(dataProprioQuittance.filter(e => {
+        return e.destinataire == userData._id
+      } ))
+
+    },[dataProprioQuittance])
+
+    useEffect(()=>{
+      console.log("MesQuittance",MesQuittance);
+    },[MesQuittance])
+
+    //MES COURRIER Proprio
+    useEffect(()=>{
+      console.log("dataProprioCourrier",dataProprioCourrier);
+      setMesCourrier(dataProprioCourrier.filter(e => {
+        return e.destinataire == userData._id
+      } ))
+
+    },[dataProprioCourrier])
+
+
+    useEffect(()=>{
+      console.log("MesCourrier",MesCourrier);
+    },[MesCourrier])
+
+
+
+    if (userData.statususer == "locataire") {
+      // MAP DOC Envoyés
+      // BAIL
+      var mapDocEnvoyerBail = dataLocataireBail.map(doc => {
+
+        var date = new Date(doc.timestamp);
+
+        var jour = "00";
+        var mois = "00";
+        var année = date.getFullYear();
+
+        if(date.getDate() < 10){
+          jour = '0'+ date.getDate()
+        }else{
+          jour = date.getDate()
+        }
+
+        if(date.getMonth() < 10){
+          mois = '0' + (date.getMonth()+1)
+        }else{
+          mois = (date.getMonth()+1)
+        }
+        return <a target="_blank" href={doc.url}>{"Bail de location "+année}</a>
+      })
+
+      // COURRIER
+      var mapDocEnvoyerCourrier = dataLocataireCourrier.map(doc => {
+        return <a target="_blank" href={doc.url}>{doc.objet}</a>
+      })
+
+
+      // MAP DOC RECU
+      // COURRIER
+      var mapDocRecuCourrier = MesCourrier.map(doc => {
+        return <a target="_blank" href={doc.url}>{doc.objet}</a>
+      })
+
+
+      // BAIL
+      var mapDocRecuBail = MesBail.map((doc) => {
+
+        console.log("MAP DOC RECU BAIL",doc);
+
+        var date = new Date(doc.timestamp);
+
+        var jour = "00";
+        var mois = "00";
+        var année = date.getFullYear();
+
+        if(date.getDate() < 10){
+        jour = '0'+ date.getDate()
+        }else{jour = date.getDate()
+        }
+
+        if(date.getMonth() < 10){
+          mois = '0' + (date.getMonth()+1)
+        }else{
+          mois = (date.getMonth()+1)
+        }
+
+        return <a target="_blank" href={doc.url}>{"Bail de location "+année}</a>
+      })
+
+
+      //  PAGINATION QUITTANCE
+      var copyQuittanceArray = [...MesQuittance]
+
+      if (copyQuittanceArray.length > 10) {
+        var nbDePage = Math.ceil(copyQuittanceArray.length/10)
+        if (nbDePage != nbPage) {
+          setNbPage(nbDePage)
+        }
+      }else {
+        var nbDePage = 1
+        if (nbDePage != nbPage) {
+          setNbPage(nbDePage)
+        }
+      }
+
+      var paginationTableau = copyQuittanceArray.splice((targetPage-1)*10,10)
+
+      var tableMap = [];
+      for (var i = 1; i <= nbDePage; i++) {
+        tableMap.push(i)
+      }
+
+      //BTN Pagination
+      var paginationLi;
+      paginationLi = tableMap.map(p => {
+        if (targetPage > 10) {
+          return <li  className="pagination-btn" onClick={()=>{
+            setTargetPage(p)
+          }}>{p}</li>
+        }
+
+      })
+
+      var paginationFirst = <li  onClick={()=>{setTargetPage(1)}}> {"<<"} </li>
+      var paginationPrev = <li  onClick={()=>{setTargetPage(targetPage-1)}}> {"<"} </li>
+      var paginationSui = <li  onClick={()=>{setTargetPage(targetPage+1)}}> {">"} </li>
+      var paginationLast = <li  onClick={()=>{setTargetPage(paginationLi.length)}}> {">>"} </li>
+
+
+      console.log(paginationTableau);
+
+
+      // QUITTANCE
+      var mapDocRecuQuittance = MesQuittance.map(doc => {
+        var date = new Date(doc.timestamp);
+
+        var nomMois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"]
+
+        var jour = "00";
+        var mois = "00";
+        var année = date.getFullYear();
+
+        if(date.getDate() < 10){
+        jour = '0'+ date.getDate()
+        }else{jour = date.getDate()
+        }
+
+        if(date.getMonth() < 10){
+          mois = '0' + (date.getMonth()+1)
+        }else{
+          mois = (date.getMonth()+1)
+        }
+        return <a target="_blank" href={doc.url}>{"Quittance "+nomMois[date.getMonth()]+" "+année}</a>
+      })
+
+    }
+
+
+
+  // Uploade IMAGE
 
   var handleChangeFile = (event) => {
     console.log("data file",event.target.files[0]);
@@ -42,35 +360,49 @@ function Upload() {
     data.append('file', dataFile)
 
 
-    //IF radio vide IF Select vide IF Fichier vide
+    //ELSE GESTION ERROR
+    if (dataFile.name != undefined) {
+      if (valueInput.length > 0) {
 
-    fetch(url+"upload-document/"+valueInput+"/"+userData._id+"/"+"5d8e148c6a42de24382f218c", {
-      method: 'post',
-      body: data
-    }).then(res => {
-      console.log(res)
-      return res.json()
-    }).then(picture => {
-      console.log("retour fetch upload",picture)
 
-    }).catch(err => {
-      console.log(err)
-    })
+        console.log(valueInput);
+        console.log(userData._id);
+        console.log(locataireChoose);
+        console.log(objetFile.length);
+
+        if (objetFile.length == 0) {
+          var urlFetch = url+"upload-document/"+valueInput+"/"+userData._id+"/"+locataireChoose+"/test"
+        }else {
+          var urlFetch = url+"upload-document/"+valueInput+"/"+userData._id+"/"+locataireChoose+"/"+objetFile
+        }
+
+
+        fetch(urlFetch, {
+          method: 'post',
+          body: data
+        }).then(res => {
+          console.log(res)
+          return res.json()
+        }).then(picture => {
+          console.log("retour fetch upload",picture)
+          setReloadFetch(!reloadFetch)
+
+
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    }
 
 
   }
 
-// ONCHANGE DU SELECT CHOIX DU LOCATAIRE POUR FILTRER LES DOCUMENTS DE CE LOCATAIRE
 
-  // fILTER ONCHANGE(SELECT) DE LOCATAIRE POUR DOCUMENT D UN LOCATAIRE
-  // var idLocataire = "5d8e148c6a42de24382f218c"
-  // var test = findUser.bail.filter(e => {
-  //   console.log("e",e.destinataire._id);
-  //   console.log(idLocataire);
-  //   return e.destinataire._id == idLocataire
-  // } )
-  //
-  // console.log("test",test);
+
+
+
+
+
 
   return (
 
@@ -81,12 +413,141 @@ function Upload() {
 
         {userData.statususer=='proprio'?<div className="main-info-doc-3">
           <h1>Selectionner un destinataire</h1>
-          <select type='select'>
-            <option value="">Laure Saint-Genis</option>
-            <option value="">Anais Chedania</option>
-            <option value="">Charlotte Renard</option>
-            <option value="">Riad Salem</option>
-            <option value="">Pierre Chatanay</option>
+          <select type='select' onChange={(e)=>{
+
+            setLocataireChoose(e.target.value)
+
+            //DOCUMENT ENVOYER
+            //Quittance
+            var dataQuittanceLocataireChoose = dataLocataireQuittance.filter(quittance => {
+              console.log("quittance",quittance.destinataire._id);
+              console.log(e.target.value);
+              return quittance.destinataire._id == e.target.value
+            } )
+            console.log("dataQuittanceLocataireChoose",dataQuittanceLocataireChoose);
+
+            dataQuittanceLocataireChoose.filter(e =>  new Date(e.timestamp).getFullYear() == new Date().getFullYear())
+
+            dataQuittanceLocataireChoose.sort((a,b)=> (a.timestamp> b.timestamp)? 1 : ((b.timestamp > a.timestamp) ? -1 : 0))
+
+            setmapQQuittance(dataQuittanceLocataireChoose.map(doc => {
+              var date = new Date(doc.timestamp);
+
+              var nomMois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"]
+
+              var jour = "00";
+              var mois = "00";
+              var année = date.getFullYear();
+
+              if(date.getDate() < 10){
+              jour = '0'+ date.getDate()
+              }else{jour = date.getDate()
+              }
+
+              if(date.getMonth() < 10){
+                mois = '0' + (date.getMonth()+1)
+              }else{
+                mois = (date.getMonth()+1)
+              }
+              return <a target="_blank" href={doc.url}>{"Quittance "+nomMois[date.getMonth()]+" "+année}</a>
+            }))
+
+
+            //Courrier
+            var dataCourrierLocataireChoose = dataLocataireCourrier.filter(courrier => {
+              console.log("courrier",courrier.destinataire._id);
+              console.log(e.target.value);
+              return courrier.destinataire._id == e.target.value
+            } )
+            console.log("dataCourrierLocataireChoose",dataCourrierLocataireChoose);
+
+            setmapCCourrier(dataCourrierLocataireChoose.map(doc => {
+              return <a target="_blank" href={doc.url}>{doc.objet}</a>
+            }))
+
+            //BAIl
+            var dataBailLocataireChoose = dataLocataireBail.filter(bail => {
+              console.log("bail",bail.destinataire._id);
+              console.log(e.target.value);
+              return bail.destinataire._id == e.target.value
+            } )
+            console.log("dataBailLocataireChoose",dataBailLocataireChoose);
+
+            setmapBBail(dataBailLocataireChoose.map(doc => {
+
+              var date = new Date(doc.timestamp);
+
+              var jour = "00";
+              var mois = "00";
+              var année = date.getFullYear();
+
+              if(date.getDate() < 10){
+                jour = '0'+ date.getDate()
+              }else{
+                jour = date.getDate()
+              }
+
+              if(date.getMonth() < 10){
+                mois = '0' + (date.getMonth()+1)
+              }else{
+                mois = (date.getMonth()+1)
+              }
+              console.log(doc.url);
+              return <a target="_blank" href={doc.url}>{"Bail de location "+année}</a>
+            }))
+
+
+            //DOCUMENT RECU
+
+            // BAIL
+            console.log("dataAllLocataire",dataAllLocataire);
+
+            var dataLocataireChoose = dataAllLocataire.filter(locataire => {
+              return locataire._id == e.target.value
+            } )
+
+            console.log("dataLocataireChoose",dataLocataireChoose[0]);
+
+
+            setmapBail(dataLocataireChoose[0].bail.map(doc => {
+
+              console.log("MAP DOC RECU BAIL",doc);
+
+              var date = new Date(doc.timestamp);
+
+              var jour = "00";
+              var mois = "00";
+              var année = date.getFullYear();
+
+              if(date.getDate() < 10){
+              jour = '0'+ date.getDate()
+              }else{jour = date.getDate()
+              }
+
+              if(date.getMonth() < 10){
+                mois = '0' + (date.getMonth()+1)
+              }else{
+                mois = (date.getMonth()+1)
+              }
+
+              return <a target="_blank" href={doc.url}>{"Bail de location "+année}</a>
+            }))
+
+            // COURRIER
+            setmapCourrier(dataLocataireChoose[0].courrier.map(doc => {
+              return <a target="_blank" href={doc.url}>{doc.objet}</a>
+            }))
+
+
+            dataLocataireChoose[0].courrier.map(doc => {
+              return <a target="_blank" href={doc.url}>{doc.objet}</a>
+            })
+
+          }}>
+            <option value="">Choisir un Locataire</option>
+            {dataAllLocataire.map(locataire=> {
+              return <option value={locataire._id}>{locataire.firstname+" "+locataire.lastname}</option>
+            })}
           </select>
 
         </div>:<div></div>}
@@ -117,6 +578,8 @@ function Upload() {
               copyRadioData = e.target.dataset.type
               setValueInput(copyRadioData)
             }}></input><label for="courrier">Courrier</label>
+
+
           </div> : <div style={{display:"flex",justifyContent:"center"}}>
 
             <input className="checkbox-upload" type="radio" id="bail" name="radio" data-type="bail" onChange={(e)=>{
@@ -136,6 +599,16 @@ function Upload() {
           </div>
           }
 
+          {valueInput == "courrier" ? <div>
+            <label for="objectFile">L'objet du Fichier :</label>
+            <input id="objectFile" type="text" onChange={(e)=>{
+              console.log(e.target.value);
+              var copyObjetFile = {...objetFile}
+              copyObjetFile = e.target.value
+              setObjetFile(copyObjetFile)
+            }}/>
+          </div> : <div></div>}
+
           <div className="choose-file"><input className="choose-file-btn" type="file" name="file" onChange={handleChangeFile}/></div>
           <button className="upload-btn" type="button" onClick={handleClickConfirm}>Envoyer</button>
         </div>
@@ -145,17 +618,27 @@ function Upload() {
           <h1> Documents reçu </h1>
           {userData.statususer=='locataire'?<div><div className="quittance menu">Quittances De Loyer</div>
           <div className="link-list">
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Quittance Novembre 2019</a>
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Quittance Octobre 2019</a>
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Quittance Septembre 2019</a>
+            {mapDocRecuQuittance}
           </div></div>:<div></div>}
+
+          <ul style={{display:"flex",justifyContent:"center"}}>
+            {targetPage == 1 ? "" : paginationFirst}
+            {targetPage == 1 ? "" : paginationPrev}
+            {paginationLi}
+            {nbPage == targetPage ? "" : paginationSui}
+            {nbPage == targetPage ? "" : paginationLast}
+          </ul>
+
           <div className="bail menu">Bails de location</div>
           <div className="link-list">
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Bail de location 2018 - 2019</a>
+            {mapDocRecuBail}
+            {mapBail}
+
           </div>
           <div className="courriers-divers menu">Courriers</div><div className="link-list">
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Devis travaux</a>
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Suite : Rappel d'échéance</a>
+            {mapDocRecuCourrier}
+            {mapCourrier}
+
           </div>
         </div>
 
@@ -164,27 +647,26 @@ function Upload() {
             <h1> Documents envoyés </h1>
             <div className="quittance menu">Quittances De Loyer</div>
             <div className="link-list">
-              <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Quittance Novembre 2019</a>
-              <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Quittance Octobre 2019</a>
-              <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Quittance Septembre 2019</a>
+              {mapQQuittance}
             </div>
             <div className="bail menu">Bails de location</div>
             <div className="link-list">
-              <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Bail de location 2018 - 2019</a>
+              {mapBBail}
             </div>
             <div className="courriers-divers menu">Courriers</div><div className="link-list">
-              <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Accord travaux</a>
-              <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Rappel d'échéance</a>
+              {mapCCourrier}
             </div>
           </div>
-          :<div className="main-info-doc-2"><h1> Documents envoyés </h1>
+          : <div className="main-info-doc-2"><h1> Documents envoyés </h1>
+
           <div className="bail menu">Bails de location</div>
           <div className="link-list">
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Bail de location 2018 - 2019</a>
+            {mapDocEnvoyerBail}
           </div>
-          <div className="courriers-divers menu">Courriers</div><div className="link-list">
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Accord travaux</a>
-            <a href="http://res.cloudinary.com/dyt3mhoy6/image/upload/v1571406071/eoddvew2fhiktk12cak2.pdf">Rappel d'échéance</a>
+
+          <div className="courriers-divers menu">Courriers</div>
+          <div className="link-list">
+            {mapDocEnvoyerCourrier}
           </div>
 
         </div>}
