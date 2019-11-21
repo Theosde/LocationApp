@@ -49,7 +49,7 @@ function Login({match}) {
             <Link className="form-check-label" to="/inscription">S'inscrire</Link>
           </div>
 
-          {islog.getResultFetchSignin.error != undefined  ?  <div>{islog.getResultFetchSignin.error}</div>  : <div></div>}
+          {islog.getResultFetchSignin.error != undefined  ?  <div className='errorMessAddLoc' style={{marginBottom:'15px'}}>{islog.getResultFetchSignin.error}</div>  : <div></div>}
 
           <button style={{marginBottom:"15px"}} className="btn btn-primary" onClick={(event)=>{
             event.preventDefault()

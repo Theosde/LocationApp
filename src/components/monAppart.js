@@ -208,7 +208,7 @@ var addLoc = () =>{
           <div><strong>Disponibilité :</strong> Occupée</div>
         </div>
       </div>
-      <div className="delete-appart"> Supprimer Cet Appartement</div>
+      {userData.statususer=='locataire'?<div></div>:<div className="delete-appart"> Supprimer Cet Appartement</div>}
 
     </div>
     <Footer/>

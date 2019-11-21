@@ -599,9 +599,9 @@ function Upload() {
           </div>
           }
 
-          {valueInput == "courrier" ? <div>
-            <label for="objectFile">L'objet du Fichier :</label>
-            <input id="objectFile" type="text" onChange={(e)=>{
+          {valueInput == "courrier" ? <div style={{display:'flex',justifyContent:'center'}}>
+            <label for="objectFile">L' objet du Fichier :</label>
+            <input style={{height:'25px',marginLeft:'10px'}}id="objectFile" type="text" onChange={(e)=>{
               console.log(e.target.value);
               var copyObjetFile = {...objetFile}
               copyObjetFile = e.target.value

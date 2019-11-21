@@ -18,7 +18,7 @@ function Header() {
     setInfoAppart(JSON.parse(sessionStorage.getItem("user")).appartement[0])
   }
   },[])
-  console.log("info appart",infoAppart._id);
+  console.log("info appart");
 
 
   return (
