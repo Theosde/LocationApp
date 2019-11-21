@@ -176,7 +176,7 @@ console.log(signUpData);
           }}>Sinscrire</button>
         </form>
 
-        {islog.islog ? <Redirect to="/appart" /> : <div></div>}
+        {islog.islog ? <Redirect to="/afterlogin" /> : <div></div>}
 
 
       </div>
