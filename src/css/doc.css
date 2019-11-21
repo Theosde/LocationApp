@@ -142,7 +142,45 @@ h1{
 }
 
 .errorMessDiv{
-  
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.errorMessDiv p{
+  background-color: white;
+  padding: 55px 275px;
+  border-radius: 15px;
+  border: 1px solid #EEE;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+a.form-check-label2{
+  cursor: pointer;
+  background-image:-webkit-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  background-image:-o-linear-gradient(bottom left, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  background-image:linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  color: white;
+  max-width: 450px;
+  padding: 5px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  border: 2px solid #7912eb;
+}
+
+a.form-check-label2:hover{
+  cbackground-image:-webkit-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:-o-linear-gradient(bottom left, #fff, #fff, #fff, #fff);
+  background-image:linear-gradient(to top right, #fff, #fff, #fff, #fff);
+  color: #7912eb;
+  border: 2px solid ;
+  border-image: -webkit-linear-gradient(to top right, #6b5fb8, #5e31c4, #7912eb, #7912eb);
+  border-radius: 25px;
+  padding: 5px 30px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 760px){
@@ -178,5 +216,11 @@ h1{
   }
   .main-info-doc-2{
     padding: 75px 25px;
+  }
+
+  .errorMessDiv p{
+    background-color: white;
+    padding: 55px 125px;
+
   }
 }

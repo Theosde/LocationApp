@@ -33,6 +33,7 @@ function Login({match}) {
         console.log("islog.getResultFetchSignin.user.appartement[0]._id",islog.getResultFetchSignin.user.appartement);
         if (islog.getResultFetchSignin.user.appartement.length == 0 ) {
           console.log("PAS D APPART AU LOCATAIRE");
+          islog.islog = false;
           setredirect(<Redirect to="/afterlogin"/>)
         }else {
           setredirect(<Redirect to={'/monappart/'+islog.getResultFetchSignin.user.appartement[0]._id}/>)
@@ -70,7 +71,7 @@ function Login({match}) {
             <Link className="form-check-label" to="/inscription">S'inscrire</Link>
           </div>
 
-          {islog.getResultFetchSignin.error != undefined  ?  <div className='errorMessAddLoc' style={{marginBottom:'15px'}}>{islog.getResultFetchSignin.error}</div>  : <div></div>}
+          {islog.getResultFetchSignin.error == undefined  ? <div></div> : islog.getResultFetchSignin.error == "" ? <div></div> :  <div className='errorMessAddLoc' style={{marginBottom:'15px'}}>{islog.getResultFetchSignin.error}</div> }
 
           <button style={{marginBottom:"15px"}} className="btn btn-primary" onClick={(event)=>{
             event.preventDefault()
