@@ -14,6 +14,7 @@ function Login({match}) {
   const[redirect,setredirect] = useState("")
 
   useEffect(()=>{
+    //islog.islog = false;
 
     if ( JSON.parse(localStorage.getItem("user")) == null ) {
       console.log("localStorage vide");
@@ -27,18 +28,21 @@ function Login({match}) {
   useEffect(()=>{
 
     if (islog.islog) {
-      if (islog.getResultFetchSignin.user.statususer == "proprio") {
-        setredirect(<Redirect to="/appart"/>)
-      }else {
-        console.log("islog.getResultFetchSignin.user.appartement[0]._id",islog.getResultFetchSignin.user.appartement);
-        if (islog.getResultFetchSignin.user.appartement.length == 0 ) {
-          console.log("PAS D APPART AU LOCATAIRE");
-          islog.islog = false;
-          setredirect(<Redirect to="/afterlogin"/>)
+      if (islog.getResultFetchSignin.user != undefined) {
+        if (islog.getResultFetchSignin.user.statususer == "proprio") {
+          setredirect(<Redirect to="/appart"/>)
         }else {
-          setredirect(<Redirect to={'/monappart/'+islog.getResultFetchSignin.user.appartement[0]._id}/>)
+          console.log("islog.getResultFetchSignin.user.appartement[0]._id",islog.getResultFetchSignin.user.appartement);
+          if (islog.getResultFetchSignin.user.appartement.length == 0 ) {
+            console.log("PAS D APPART AU LOCATAIRE");
+            islog.islog = false;
+            setredirect(<Redirect to="/afterlogin"/>)
+          }else {
+            setredirect(<Redirect to={'/monappart/'+islog.getResultFetchSignin.user.appartement[0]._id}/>)
+          }
         }
       }
+
     }
 
 

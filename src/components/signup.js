@@ -15,6 +15,7 @@ function Signup() {
 
   const[errorInput,setErrorInput] = useState({date:"",phone:"",email:"",password:"",confirmPassword:"", error:false})
 
+console.log(islog.islog);
 console.log(signUpData);
   return (
 
@@ -167,7 +168,8 @@ console.log(signUpData);
               }else {
                 statusUser = "proprio"
               }
-              islog.signup(signUpData.firstname,signUpData.lastname,datenaissance,signUpData.email,signUpData.password,signUpData.phone,statusUser)
+              islog.signup(signUpData.firstname,signUpData.lastname,datenaissance,signUpData.email,signUpData.phone,signUpData.password,statusUser);
+              setActualisationPage(!actualisationPage);
             }
 
 

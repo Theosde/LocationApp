@@ -67,13 +67,25 @@ let isLoggin = {
     .then(function(data) {
       console.log("Retour Fetch SignUp",data);
 
-      localStorage.setItem("user", JSON.stringify({email:data.user.email,password:data.user.password}))
-      delete data.user.salt;
-      sessionStorage.setItem("user", JSON.stringify(data.user))
 
-      isLoggin.islog = true
-      isLoggin.getResultFetchSignUp = data
-      setTimeout(cb, 100);
+
+
+      if (data.result == false) {
+        isLoggin.getResultFetchSignUp = data
+        setTimeout(cb, 100);
+      }else {
+
+        localStorage.setItem("user", JSON.stringify({email:data.user.email,password:data.user.password}))
+        delete data.user.salt;
+        sessionStorage.setItem("user", JSON.stringify(data.user))
+
+        isLoggin.islog = true
+
+
+        isLoggin.getResultFetchSignUp = data
+        setTimeout(cb, 100);
+
+      }
 
 
     })
