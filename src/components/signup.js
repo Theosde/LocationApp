@@ -28,16 +28,18 @@ console.log(signUpData);
           <div className="form-group">
             <label>Statut du compte</label>
             <br/>
-            <input checked={signUpData.status} type="radio" name="status" value="locataire" onChange={()=>{
-              var copysignUpData = {...signUpData}
-              copysignUpData.status = !copysignUpData.status
-              setSignUpData(copysignUpData)
-            }}/> Locataire
-            <input checked={!signUpData.status} type="radio" name="status" value="propriétaire" onChange={()=>{
-              var copysignUpData = {...signUpData}
-              copysignUpData.status = !copysignUpData.status
-              setSignUpData(copysignUpData)
-            }}/> Propriétaire
+              <div className="radioContainer" style={{width:'100%'}}>
+                <input checked={signUpData.status} type="radio" name="status" value="locataire" onChange={()=>{
+                  var copysignUpData = {...signUpData}
+                  copysignUpData.status = !copysignUpData.status
+                  setSignUpData(copysignUpData)
+                }}/> <p>Locataire</p>
+                <input checked={!signUpData.status} type="radio" name="status" value="propriétaire" onChange={()=>{
+                  var copysignUpData = {...signUpData}
+                  copysignUpData.status = !copysignUpData.status
+                  setSignUpData(copysignUpData)
+                }}/> <p>Propriétaire</p>
+            </div>
           </div>
 
           <div className="form-org-1">

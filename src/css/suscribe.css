@@ -58,6 +58,18 @@ a:hover{
   align-items: center;
   justify-content: space-between;
 }
+.radioContainer{
+  display:flex;
+}
+
+.radioContainer input{
+  margin-top: 4px;
+}
+
+.radioContainer p{
+  margin-right: 10px;
+  margin-left: 5px;
+}
 
 @media screen and (max-width: 760px){
 
