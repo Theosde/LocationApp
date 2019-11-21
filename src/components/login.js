@@ -33,7 +33,7 @@ function Login({match}) {
         console.log("islog.getResultFetchSignin.user.appartement[0]._id",islog.getResultFetchSignin.user.appartement);
         if (islog.getResultFetchSignin.user.appartement.length == 0 ) {
           console.log("PAS D APPART AU LOCATAIRE");
-          // setredirect(<Redirect to="/appart"/>)
+          setredirect(<Redirect to="/afterlogin"/>)
         }else {
           setredirect(<Redirect to={'/monappart/'+islog.getResultFetchSignin.user.appartement[0]._id}/>)
         }
