@@ -38,8 +38,13 @@ function MonAppart(props) {
     }else {
       console.log("localStorage", JSON.parse(sessionStorage.getItem("user")) );
       setUserData(JSON.parse(sessionStorage.getItem("user")))
-      setInfosProprio(JSON.parse(sessionStorage.getItem("user")).appartement[0].idproprio)
-      setDataRib(JSON.parse(sessionStorage.getItem("user")).appartement[0].idproprio.rib)
+      if (JSON.parse(sessionStorage.getItem("user")).appartement.length == 0) {
+        setInfosProprio([])
+        setDataRib([])
+      }else {
+        setInfosProprio(JSON.parse(sessionStorage.getItem("user")).appartement[0].idproprio)
+        setDataRib(JSON.parse(sessionStorage.getItem("user")).appartement[0].idproprio.rib)
+      }
     }
   },[])
 
@@ -71,6 +76,7 @@ console.log("infosProprio",infosProprio.lastname);
         console.log(data.findAppart.adresse.rue);
         setStateInfosAdress(data.findAppart.adresse);
         setStateAllLocataire(data.findAppart.idlocataire);
+
       }).catch(err => {
         console.log(err)
       })

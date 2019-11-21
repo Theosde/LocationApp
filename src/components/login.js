@@ -11,6 +11,8 @@ function Login({match}) {
 
   const[actualisationPage,setActualisationPage] = useState(false)
 
+  const[redirect,setredirect] = useState("")
+
   useEffect(()=>{
 
     if ( JSON.parse(localStorage.getItem("user")) == null ) {
@@ -21,6 +23,25 @@ function Login({match}) {
     }
 
   },[])
+
+  useEffect(()=>{
+
+    if (islog.islog) {
+      if (islog.getResultFetchSignin.user.statususer == "proprio") {
+        setredirect(<Redirect to="/appart"/>)
+      }else {
+        console.log("islog.getResultFetchSignin.user.appartement[0]._id",islog.getResultFetchSignin.user.appartement);
+        if (islog.getResultFetchSignin.user.appartement.length == 0 ) {
+          console.log("PAS D APPART AU LOCATAIRE");
+          // setredirect(<Redirect to="/appart"/>)
+        }else {
+          setredirect(<Redirect to={'/monappart/'+islog.getResultFetchSignin.user.appartement[0]._id}/>)
+        }
+      }
+    }
+
+
+  },[islog.islog])
 
   return (
     <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"100vh"}}>
@@ -59,7 +80,7 @@ function Login({match}) {
 
         </form>
 
-        {!islog.islog ?  <div></div> : islog.getResultFetchSignin.user.statususer == 'locataire' ? <Redirect to={'/monappart/'+islog.getResultFetchSignin.user.appartement[0]._id}/> : <Redirect to="/appart"/>}
+        {redirect}
 
       </div>
 

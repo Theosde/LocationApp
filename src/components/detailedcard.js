@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from "./header";
 import Footer from "./footer";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import "../css/detailedcard.css";
 import "../css/add.css";
 
@@ -21,7 +21,9 @@ function DetailedCard(props) {
 
   const[userData,setUserData] = useState({})
 
- const [errorAddLocataire,setStateErrorAddLocataire] = useState('')
+  const [errorAddLocataire,setStateErrorAddLocataire] = useState('')
+
+  const [isSuppr,setIsSuppr] = useState(false)
 
   useEffect(()=>{
     if ( JSON.parse(sessionStorage.getItem("user")) == null ) {
@@ -163,7 +165,7 @@ var addLoc = () =>{
           {mapAllLocat}
         </div>
       </div>
-    
+
 
       <div className="detailed-infos-card">
         <div className="bien-infos">
@@ -190,10 +192,24 @@ var addLoc = () =>{
           <div><strong>Disponibilité :</strong> Occupée</div>
         </div>
       </div>
-      <div className="delete-appart"> Supprimer Cet Appartement</div>
+      <div className="delete-appart" onClick={()=>{
+        fetch(url+"supprAppart/"+infosAppart._id, {
+          method: 'POST',
+        }).then(res => {
+          console.log(res)
+          return res.json()
+        }).then(data => {
+          console.log("retour fetch suppr appart",data)
+          setIsSuppr(!isSuppr)
+        }).catch(err => {
+          console.log(err)
+        })
+      }}> Supprimer Cet Appartement</div>
 
     </div>
     <Footer/>
+
+    {isSuppr ? <Redirect to="/appart" /> : ""}
 
   </div>
 
